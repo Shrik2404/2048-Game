@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2048 Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #faf8ef;
+            margin: 0;
+            padding: 20px;
+        }
+        .game-container {
+            background: #bbada0;
+            border-radius: 10px;
+            padding: 15px;
+            width: 500px;
+            height: 500px;
+            position: relative;
+            margin: 0 auto;
+        }
+        .grid-container {
+            position: relative;
+            width: 470px;
+            height: 470px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 15px;
+        }
+        .grid-cell {
+            background: rgba(238, 228, 218, 0.35);
+            border-radius: 6px;
+        }
+        .tile {
+            position: absolute;
+            width: 107.5px;
+            height: 107.5px;
+            background: #eee4da;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 55px;
+            font-weight: bold;
+            color: #776e65;
+        }
+        .tile-2 { background: #eee4da; }
+        .tile-4 { background: #ede0c8; }
+        .tile-8 { background: #f2b179; color: white; }
+        .tile-16 { background: #f59563; color: white; }
+        .controls {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="grid-container" id="grid">
+            <!-- Grid cells will be created by JS -->
+        </div>
+    </div>
+    
+    <div class="controls">
+        <button onclick="testTiles()">Add Test Tiles</button>
+        <button onclick="clearTiles()">Clear Tiles</button>
+    </div>
+
+    <script>
+        const grid = document.getElementById('grid');
+        
+        // Create grid cells
+        for (let i = 0; i < 16; i++) {
+            const cell = document.createElement('div');
+            cell.className = 'grid-cell';
+            grid.appendChild(cell);
+        }
+        
+        function testTiles() {
+            clearTiles();
+            
+            // Create test tiles
+            const tiles = [
+                {value: 2, row: 0, col: 0},
+                {value: 4, row: 0, col: 1},
+                {value: 8, row: 1, col: 0},
+                {value: 16, row: 1, col: 1}
+            ];
+            
+            tiles.forEach(({value, row, col}) => {
+                const tile = document.createElement('div');
+                tile.className = `tile tile-${value}`;
+                tile.textContent = value;
+                
+                const x = col * 122.5; // 107.5 + 15 gap
+                const y = row * 122.5;
+                tile.style.left = x + 'px';
+                tile.style.top = y + 'px';
+                
+                grid.appendChild(tile);
+            });
+        }
+        
+        function clearTiles() {
+            document.querySelectorAll('.tile').forEach(tile => tile.remove());
+        }
+        
+        // Auto-test on load
+        setTimeout(testTiles, 500);
+    </script>
+</body>
+</html>

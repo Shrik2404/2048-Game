@@ -1,0 +1,257 @@
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+    background-color: #faf8ef;
+    color: #776e65;
+    line-height: 1.4;
+    font-size: 18px;
+}
+
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 80px;
+    font-weight: bold;
+    margin: 0;
+    line-height: 1;
+    color: #776e65;
+}
+
+.scores {
+    display: flex;
+    gap: 10px;
+}
+
+.score-box {
+    background: #bbada0;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 3px;
+    text-align: center;
+    min-width: 62px;
+    position: relative;
+}
+
+.score-title {
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: bold;
+    line-height: 13px;
+}
+
+.score-value {
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 47px;
+}
+
+/* Game Intro */
+.game-intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+button {
+    background: #8f7a66;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+button:hover {
+    background: #9f8b77;
+}
+
+/* Game Container */
+.game-container {
+    background: #bbada0;
+    border-radius: 10px;
+    padding: 15px;
+    position: relative;
+    margin-bottom: 20px;
+    width: 500px;
+    height: 500px;
+}
+
+.grid-container {
+    position: relative;
+    width: 470px;
+    height: 470px;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 15px;
+}
+
+.grid-cell {
+    background: rgba(238, 228, 218, 0.35);
+    border-radius: 6px;
+    aspect-ratio: 1;
+}
+
+.tile {
+    position: absolute !important;
+    width: 107.5px !important;
+    height: 107.5px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    font-size: 55px !important;
+    font-weight: bold !important;
+    border-radius: 6px !important;
+    transition: all 0.15s ease-in-out !important;
+    z-index: 100 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* All tile colors are now handled dynamically by JavaScript */
+
+/* Animations */
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes pop {
+    0% { transform: scale(0.8); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.tile-new {
+    animation: appear 0.2s ease-in-out;
+}
+
+.tile-merged {
+    z-index: 3;
+    animation: pop 0.15s ease-in-out;
+}
+
+/* Game Over & Win Screens */
+.game-over,
+.game-won {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(238, 228, 218, 0.73);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    display: none;
+}
+
+.game-over h2,
+.game-won h2 {
+    font-size: 60px;
+    margin-bottom: 20px;
+    color: #776e65;
+}
+
+/* Control Buttons */
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.control-row {
+    display: flex;
+    gap: 10px;
+}
+
+.control-btn {
+    width: 60px;
+    height: 60px;
+    background: #8f7a66;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control-btn:hover {
+    background: #9f8b77;
+    transform: scale(1.05);
+}
+
+.control-btn:active {
+    transform: scale(0.95);
+}
+
+/* Game Explanation */
+.game-explanation {
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #776e65;
+}
+
+/* Responsive Design */
+@media (max-width: 520px) {
+    .container {
+        padding: 10px;
+    }
+    
+    h1 {
+        font-size: 50px;
+    }
+    
+    .score-box {
+        min-width: 60px;
+        padding: 8px 10px;
+    }
+    
+    .tile {
+        font-size: 28px;
+    }
+    
+    .tile-128, .tile-256, .tile-512 {
+        font-size: 24px;
+    }
+    
+    .tile-1024, .tile-2048 {
+        font-size: 20px;
+    }
+}
